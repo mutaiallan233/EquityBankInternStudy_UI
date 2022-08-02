@@ -1,19 +1,3 @@
-import 'dart:convert';
-
-
-import 'package:flutter/services.dart';
-import 'package:flutter/services.dart';
-
-
-List<UploadDetails> sampleFromJson(String str) {
-  final jsonData = json.decode(str);
-  return new List<UploadDetails>.from(jsonData.map((x) => UploadDetails.fromJson(x)));
-}
-
-/*String sampleToJson(List<Sample> data) {
-  final dyn = new List<dynamic>.from(data.map((x) => x.toJson()));
-  return json.encode(dyn);
-}*/
 
 class UploadDetails {
   String? title;

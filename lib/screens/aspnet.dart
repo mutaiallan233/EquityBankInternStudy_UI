@@ -39,7 +39,16 @@ class _AspnetState extends State<Aspnet> {
                   List<UploadDetails> uploadDetails = await getUploadDetailsFromApi(url);
                   uploadDetails.forEach((element) { print(element.title);});
                 },
-                    icon: Icon(Icons.cloud_download))
+                    icon: Icon(Icons.cloud_download)
+                ),
+                IconButton(
+                    onPressed: () async {
+                      String url = endpoints.uploadGetId();
+                      UploadDetails uploadDetails = await getUploadDetailsFromApiById(url);
+                      print(uploadDetails.title);
+                    },
+                    icon: Icon(Icons.cloud_circle)
+      )
               ],
             ),
             isPressed?Text('Dio say\'s: ' + dioSays!):Text('Click on the icon')
