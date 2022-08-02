@@ -64,8 +64,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      //home: Shell(),
-      home: const Aspnet(),
+      home: Shell(),
+      //home: const Aspnet(),
       initialRoute: '/',
       routes:{
         '/aspnet': (context) => const Aspnet(),

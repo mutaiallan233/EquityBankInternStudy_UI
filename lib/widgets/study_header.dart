@@ -44,7 +44,7 @@ class PlaylistHeader extends StatelessWidget {
                   ),
                   const SizedBox(height: 16.0),
                   Text(
-                    'Created by ${playlist.creator} • ${playlist.songs.length} songs, ${playlist.duration}',
+                    'Created by ${playlist.creator} • ${playlist.songs.length} topics, ${playlist.duration}',
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                 ],
@@ -92,7 +92,7 @@ class _PlaylistButtons extends StatelessWidget {
         ),
         const SizedBox(width: 8.0),
         IconButton(
-          icon: const Icon(Icons.favorite_border),
+          icon: const Icon(Icons.thumb_up_alt_outlined),
           iconSize: 30.0,
           onPressed: () {},
         ),
@@ -103,7 +103,7 @@ class _PlaylistButtons extends StatelessWidget {
         ),
         const Spacer(),
         Text(
-          'FOLLOWERS\n$followers',
+          'Interns \04',
           style: Theme.of(context).textTheme.overline!.copyWith(fontSize: 12.0),
           textAlign: TextAlign.right,
         )

@@ -1,20 +1,9 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
+
 import 'package:flutter/services.dart';
 import 'package:flutter/services.dart';
 
-void getHttp() async {
-  try {
-    Response response;
-    var dio = Dio();
-    response = await dio.get('https://localhost:7168/intern/get-all');
-    String answer = response.data.toString();
-    print(response.data[0]['workEmail']);
-  } catch (e) {
-    print(e);
-  }
-}
 
 List<UploadDetails> sampleFromJson(String str) {
   final jsonData = json.decode(str);
@@ -50,26 +39,20 @@ class UploadDetails {
   });
   factory UploadDetails.fromJson(Map<String, dynamic> json) {
     return UploadDetails(
-        title: json['title'],
-        department: json['department'],
-        content: json['content'],
-        summary: json['summary'],
-        duration: json['duration'],
-        contentCreatorId: json['contentCreatorId'],
-        id: json['id'],
-        dateAdded: json['dateAdded'],
-        dateModified: json['dateModified']
+        title: json['title'] ?? 'title null',
+        department: json['department']?? 'department null',
+        content: json['content']?? 'content null',
+        summary: json['summary']?? 'summary null',
+        duration: json['duration']?? 0,
+        contentCreatorId: json['contentCreatorId']?? 'contentCreatorID null',
+        id: json['id']?? 'id null',
+        dateAdded: json['dateAdded'].toString(),
+        dateModified: json['dateModified'].toString()
     );
   }
 
 }
 /*Future<List<UploadDetails>> ReadJsonData(Map<String, dynamic> jsondata) async {
-
-//read json file
-
-  //final jsondata = await rootBundle.rootBundle.loadString('jsonfile/productlist.json');
-
-//decode json data as list
 
   final list = json.decode(jsondata.toString()) as List<Map<String, dynamic>>;
 
