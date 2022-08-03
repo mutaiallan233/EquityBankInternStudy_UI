@@ -15,43 +15,51 @@ class Aspnet extends StatefulWidget {
 }
 
 class _AspnetState extends State<Aspnet> {
-
-
-
   bool isPressed = false;
   String? dioSays = 'null';
-   EndPoints endpoints = new EndPoints();
+  EndPoints endpoints = new EndPoints();
   //String? urlprovided = 'https://localhost:7168/uploads/get-all';
   //EndPoints.uploadGetAll();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Container(
+      body: Center(
+          child: Container(
         child: Column(
           children: [
             Row(
               children: [
                 Text('Anything yet'),
-                IconButton(onPressed: () async {
-                 String url = endpoints.uploadGetAll();
+                IconButton(
+                    onPressed: () async {
+                      String url = endpoints.uploadGetAll();
 
-                  List<UploadDetails> uploadDetails = await getUploadDetailsFromApi(url);
-                  uploadDetails.forEach((element) { print(element.title);});
-                },
-                    icon: Icon(Icons.cloud_download)
-                ),
+                      List<UploadDetails> uploadDetails =
+                          await getUploadDetailsFromApi(url);
+                      uploadDetails.forEach((element) {
+                        print(element.title);
+                      });
+                    },
+                    icon: Icon(Icons.cloud_download)),
                 IconButton(
                     onPressed: () async {
                       String url = endpoints.uploadGetId();
-                      UploadDetails uploadDetails = await getUploadDetailsFromApiById(url);
+                      UploadDetails uploadDetails =
+                          await getUploadDetailsFromApiById(url);
                       print(uploadDetails.title);
                     },
-                    icon: Icon(Icons.cloud_circle)
-      )
+                    icon: Icon(Icons.cloud_circle)),
+                IconButton(
+                    onPressed: () async {
+                     makePostRequest();
+                    },
+                    icon: Icon(Icons.cloud_upload))
               ],
             ),
-            isPressed?Text('Dio say\'s: ' + dioSays!):Text('Click on the icon')
+            isPressed
+                ? Text('Dio say\'s: ' + dioSays!)
+                : Text('Click on the icon')
           ],
         ),
       )),

@@ -35,6 +35,20 @@ class UploadDetails {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+        data['title'] = this.title;
+        data['department'] = this.department;
+        data['content'] = this.content;
+        data['summary'] = this.summary;
+        data['duration'] = this.duration;
+        data['contentCreatorId'] = contentCreatorId;
+       //id: json['id']?? 'id null',
+        //dateAdded: json['dateAdded'].toString(),
+        //dateModified: json['dateModified'].toString()
+    return data;
+  }
+
 }
 /*Future<List<UploadDetails>> ReadJsonData(Map<String, dynamic> jsondata) async {
 
