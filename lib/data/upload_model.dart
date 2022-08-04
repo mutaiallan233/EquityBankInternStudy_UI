@@ -103,9 +103,9 @@ class UploadDetails {
     data['summary'] = this.summary;
     data['duration'] = this.duration;
     data['contentCreatorId'] = this.contentCreatorId;
-    data['id'] = this.id;
-    data['dateAdded'] = this.dateAdded;
-    data['dateModified'] = this.dateModified;
+    //data['id'] = this.id;
+    //data['dateAdded'] = this.dateAdded;
+    //data['dateModified'] = this.dateModified;
     return data;
   }
 }

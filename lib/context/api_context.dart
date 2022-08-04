@@ -58,28 +58,56 @@ String baseUrl = 'https://localhost:7168/';
   ///////
 /////   LEARNING MATERIAL
   ///////
-  String LearningMaterialGetAll() {
+  String learningMaterialGetAll() {
     String urlLeaningMaterialGetAll = '${baseUrl}learning-material/get-all';
     return urlLeaningMaterialGetAll;
   }
 
-  String LearningMaterialGetId() {
+  String learningMaterialGetId() {
     String urlLeaningMaterialGetId = '${baseUrl}learning-material/get-by-id/{d56e4b46-a28d-4755-afbe-f46a1f7c21de}';
     return urlLeaningMaterialGetId;
   }
 
-  String LearningMaterialUpdate() {
+  String learningMaterialUpdate() {
     String urlLeaningMaterialUpdate = '${baseUrl}learning-material/update/{d56e4b46-a28d-4755-afbe-f46a1f7c21de}';
     return urlLeaningMaterialUpdate;
   }
 
-  String LearningMaterialPost() {
-    String urlLeaningMaterialPost = '${baseUrl}learning-material/add-uploads/{d56e4b46-a28d-4755-afbe-f46a1f7c21de}';
+  String learningMaterialPost() {
+    String urlLeaningMaterialPost = '${baseUrl}learning-material/add-learning-material/{d56e4b46-a28d-4755-afbe-f46a1f7c21de}';
     return urlLeaningMaterialPost;
   }
 
-  String LearningMaterialDelete() {
+  String learningMaterialDelete() {
     String urlLeaningMaterialDelete = '${baseUrl}learning-material/delete/{d56e4b46-a28d-4755-afbe-f46a1f7c21de}';
+    return urlLeaningMaterialDelete;
+  }
+
+  ///////
+/////   CONTENT CREATOR
+  ///////
+  String contentCreatorGetAll() {
+    String urlLeaningMaterialGetAll = '${baseUrl}content-creator/get-all';
+    return urlLeaningMaterialGetAll;
+  }
+
+  String contentCreatorGetId() {
+    String urlLeaningMaterialGetId = '${baseUrl}content-creator/get-by-id/{e42c4292-6cf0-4874-8739-6581a5c3c61d}';
+    return urlLeaningMaterialGetId;
+  }
+
+  String contentCreatorUpdate() {
+    String urlLeaningMaterialUpdate = '${baseUrl}content-creator/update/{e42c4292-6cf0-4874-8739-6581a5c3c61d}';
+    return urlLeaningMaterialUpdate;
+  }
+
+  String contentCreatorPost() {
+    String urlLeaningMaterialPost = '${baseUrl}content-creator/add-creator/{e42c4292-6cf0-4874-8739-6581a5c3c61d}';
+    return urlLeaningMaterialPost;
+  }
+
+  String contentCreatorDelete() {
+    String urlLeaningMaterialDelete = '${baseUrl}content-creator/delete/{e42c4292-6cf0-4874-8739-6581a5c3c61d}';
     return urlLeaningMaterialDelete;
   }
 

@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:intern_study_guide/context/api_context.dart';
+import 'package:intern_study_guide/data/content_creator_model.dart';
+import 'package:intern_study_guide/data/learning_material_model.dart';
 
 import 'package:intern_study_guide/data/upload_model.dart';
 
@@ -22,15 +24,32 @@ Future<List> getDataFromApi(String urlprovided) async {
   }
 }
 
-Future<List<UploadDetails>> getUploadDetailsFromApi(String api) async {
-  var list = await getDataFromApi(api);
-  print(list);
-  return list.map((e) => UploadDetails.fromJson(e)).toList();
+Future<dynamic> getUploadDetailsFromApi(url,model) async {
+  var mapped = await getDataFromApi(url);
+  dynamic modelDetails;
+  print(mapped);
+
+  List<UploadDetails> uploadDetails = mapped.map((e) => UploadDetails.fromJson(e)).toList();
+  List<InternDetails> internDetails = mapped.map((e) => InternDetails.fromJson(e)).toList();
+  List<LearningMaterialDetails> learningMaterialDetails= mapped.map((e) => LearningMaterialDetails.fromJson(e)).toList();
+  List<ContentCreatorDetails> contentCreatorDetails = mapped.map((e) => ContentCreatorDetails.fromJson(e)).toList();
+  if(model == 'upload'){
+    modelDetails = uploadDetails;
+  }
+  if(model == 'intern'){
+    modelDetails = internDetails;
+  }
+  if(model == 'learning'){
+    modelDetails = learningMaterialDetails;
+  }
+  if(model == 'content'){
+    modelDetails = contentCreatorDetails;
+  }
+  return modelDetails;
 }
 
 //////// GET UPLOADS BY ID
 Future<dynamic> makeGetRequest(String api) async {
-  //var client = http.Client();
 
   final url = Uri.parse(api);
   Response response = await get(url);
@@ -43,7 +62,6 @@ Future<dynamic> makeGetRequest(String api) async {
   return decodedResponse;
 }
 
-
 Future<dynamic> getUploadDetailsFromApiById(url,model) async {
   var mapped = await makeGetRequest(url);
   dynamic modelDetails;
@@ -52,39 +70,46 @@ Future<dynamic> getUploadDetailsFromApiById(url,model) async {
   //// ASSIGN MODEL TO ENDPOINT
   UploadDetails uploadDetails= new UploadDetails.fromJson(mapped);
   InternDetails internDetails = new InternDetails.fromJson(mapped);
+  LearningMaterialDetails learningMaterialDetails= new LearningMaterialDetails.fromJson(mapped);
+  ContentCreatorDetails contentCreatorDetails = new ContentCreatorDetails.fromJson(mapped);
   if(model == 'upload'){
      modelDetails = uploadDetails;
   }
   if(model == 'intern'){
      modelDetails = internDetails;
   }
-
+  if(model == 'learning'){
+    modelDetails = learningMaterialDetails;
+  }
+  if(model == 'content'){
+    modelDetails = contentCreatorDetails;
+  }
   return modelDetails;
 }
-/*
 ////POST TO UPLOADS
-Future<Map<String, dynamic>> makePostRequest() async {
+Future<void> makePostRequest() async {
   final url = Uri.parse(endpoints.uploadPost());
-  final headers = {"Content-type": "application/json"};
-  final json = '{"title": "Solid Principles","department": "Integrations department","content": "Programmer Best Practicers","summary": "Structure your code responsibly","duration": 5,"contentCreatorId": "3a898ee3-787b-4e35-b1d9-ef71e22f1747"}';
-  final response = await post(url, headers: headers, body: json);
-  //var decodedResponse = jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
+  //final headers = {"Content-type": "application/json"};
+  //final json = '{"title": "Hello", "department": "Solution development", "content": "Classes and Constructors", "summary": "Injecting interfaces into classes and functions like a pro",  "duration": 6,  "contentCreatorId": "68e42439-b4c9-413c-b33c-f25cfb444e72"}';
+  Map<String, dynamic> customer = UploadDetails(
+    title: 'Dependency Injection',
+    department: 'Solution development',
+    content: 'Classes and Constructors',
+    summary: 'Injecting interfaces into classes and functions like a pro',
+    duration: 6,
+    contentCreatorId: '68e42439-b4c9-413c-b33c-f25cfb444e72'
+  ).toJson();
+  final json = customer;
+  final response = await post(url,  body: json);
   print('Status code: ${response.statusCode}');
   print('Body: ${response.body}');
 
-   UploadDetails  details = UploadDetails("title": "Solid Principles","department": "Integrations department","content": "Programmer Best Practicers","summary": "Structure your code responsibly","duration": 5,"contentCreatorId": "3a898ee3-787b-4e35-b1d9-ef71e22f1747");
-  Map<String, dynamic> map = person.toJson();
-  String rawJson = jsonEncode(map);
+ // Map<String, dynamic> person = UploadDetails().toJson();
+  //Map<String, dynamic> map = person.toJson();
+ // person.data['title'];
+  //String rawJson = jsonEncode(map);
 
-  return decodedResponse;
 }
-
-Future<UploadDetails> patchUploadDetails() async{
-  var mapped = await makePostRequest();
-  print('AM WORKING!');
-  return UploadDetails.toJson(mapped);
-}
-*/
 
 ////PATCH IN UPLOADS
 Future<void> makePatchRequest() async {
