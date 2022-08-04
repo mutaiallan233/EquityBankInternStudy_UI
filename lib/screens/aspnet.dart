@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intern_study_guide/context/api_context.dart';
 import 'package:intern_study_guide/controller/upload/upload.dart';
+import 'package:intern_study_guide/data/intern_model.dart';
 
 import '../data/upload_model.dart';
 
@@ -26,8 +27,10 @@ class _AspnetState extends State<Aspnet> {
     return Scaffold(
       body: Center(
           child: Container(
-        child: Column(
-          children: [
+            child: Column(
+              children: [
+                Divider(),
+            Text('upload'),
             Row(
               children: [
                 Text('Anything yet'),
@@ -45,21 +48,107 @@ class _AspnetState extends State<Aspnet> {
                 IconButton(
                     onPressed: () async {
                       String url = endpoints.uploadGetId();
+                      String model = 'upload';
                       UploadDetails uploadDetails =
-                          await getUploadDetailsFromApiById(url);
+                          await getUploadDetailsFromApiById(url,model);
                       print(uploadDetails.title);
                     },
                     icon: Icon(Icons.cloud_circle)),
                 IconButton(
                     onPressed: () async {
-                     makePostRequest();
+                     //makePostRequest();
                     },
-                    icon: Icon(Icons.cloud_upload))
+                    icon: Icon(Icons.cloud_upload)),
+                IconButton(
+                    onPressed: () async {
+                      String url = endpoints.internGetId();
+                      String model = 'intern';
+                      InternDetails internDetails =
+                      await getUploadDetailsFromApiById(url,model);
+                    },
+                    icon: Icon(Icons.cloud_circle_outlined)),
               ],
             ),
-            isPressed
-                ? Text('Dio say\'s: ' + dioSays!)
-                : Text('Click on the icon')
+                Divider(),
+                Text('Intern'),
+                Row(
+                  children: [
+                    Text('Anything yet'),
+                    IconButton(
+                        onPressed: () async {
+                          String url = endpoints.uploadGetAll();
+
+                          List<UploadDetails> uploadDetails =
+                          await getUploadDetailsFromApi(url);
+                          uploadDetails.forEach((element) {
+                            print(element.title);
+                          });
+                        },
+                        icon: Icon(Icons.cloud_download)),
+                    IconButton(
+                        onPressed: () async {
+                          String url = endpoints.uploadGetId();
+                          String model = 'upload';
+                          UploadDetails uploadDetails =
+                          await getUploadDetailsFromApiById(url,model);
+                          print(uploadDetails.title);
+                        },
+                        icon: Icon(Icons.cloud_circle)),
+                    IconButton(
+                        onPressed: () async {
+                          //makePostRequest();
+                        },
+                        icon: Icon(Icons.cloud_upload)),
+                    IconButton(
+                        onPressed: () async {
+                          String url = endpoints.internGetId();
+                          String model = 'intern';
+                          InternDetails internDetails =
+                          await getUploadDetailsFromApiById(url,model);
+                        },
+                        icon: Icon(Icons.cloud_circle_outlined)),
+                  ],
+                ),
+                Divider(),
+                Text('Learning Material'),
+                Row(
+                  children: [
+                    Text('Anything yet'),
+                    IconButton(
+                        onPressed: () async {
+                          String url = endpoints.uploadGetAll();
+
+                          List<UploadDetails> uploadDetails =
+                          await getUploadDetailsFromApi(url);
+                          uploadDetails.forEach((element) {
+                            print(element.title);
+                          });
+                        },
+                        icon: Icon(Icons.cloud_download)),
+                    IconButton(
+                        onPressed: () async {
+                          String url = endpoints.uploadGetId();
+                          String model = 'upload';
+                          UploadDetails uploadDetails =
+                          await getUploadDetailsFromApiById(url,model);
+                          print(uploadDetails.title);
+                        },
+                        icon: Icon(Icons.cloud_circle)),
+                    IconButton(
+                        onPressed: () async {
+                          //makePostRequest();
+                        },
+                        icon: Icon(Icons.cloud_upload)),
+                    IconButton(
+                        onPressed: () async {
+                          String url = endpoints.internGetId();
+                          String model = 'intern';
+                          InternDetails internDetails =
+                          await getUploadDetailsFromApiById(url,model);
+                        },
+                        icon: Icon(Icons.cloud_circle_outlined)),
+                  ],
+                ),
           ],
         ),
       )),

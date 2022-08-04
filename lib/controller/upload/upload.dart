@@ -5,6 +5,8 @@ import 'package:intern_study_guide/context/api_context.dart';
 
 import 'package:intern_study_guide/data/upload_model.dart';
 
+import '../../data/intern_model.dart';
+
 EndPoints endpoints = new EndPoints();
 ////// GET ALL UPLOADS
 Future<List> getDataFromApi(String urlprovided) async {
@@ -27,13 +29,13 @@ Future<List<UploadDetails>> getUploadDetailsFromApi(String api) async {
 }
 
 //////// GET UPLOADS BY ID
-Future<Map<String, dynamic>> makeGetRequest(String api) async {
+Future<dynamic> makeGetRequest(String api) async {
   //var client = http.Client();
 
   final url = Uri.parse(api);
   Response response = await get(url);
   var decodedResponse =
-      jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
+      jsonDecode(utf8.decode(response.bodyBytes)) as Map;
 
   print('Status code: ${response.statusCode}');
   print('Headers: ${response.headers}');
@@ -41,15 +43,27 @@ Future<Map<String, dynamic>> makeGetRequest(String api) async {
   return decodedResponse;
 }
 
-Future<UploadDetails> getUploadDetailsFromApiById(url) async {
-  var mapped = await makeGetRequest(url);
-  print('Retrieved: ${mapped}');
-  print('IAM WORKING');
-  return UploadDetails.fromJson(mapped);
-}
 
+Future<dynamic> getUploadDetailsFromApiById(url,model) async {
+  var mapped = await makeGetRequest(url);
+  dynamic modelDetails;
+  print('Retrieved: ${mapped}');
+
+  //// ASSIGN MODEL TO ENDPOINT
+  UploadDetails uploadDetails= new UploadDetails.fromJson(mapped);
+  InternDetails internDetails = new InternDetails.fromJson(mapped);
+  if(model == 'upload'){
+     modelDetails = uploadDetails;
+  }
+  if(model == 'intern'){
+     modelDetails = internDetails;
+  }
+
+  return modelDetails;
+}
+/*
 ////POST TO UPLOADS
-/*Future<Map<String, dynamic>> makePostRequest() async {
+Future<Map<String, dynamic>> makePostRequest() async {
   final url = Uri.parse(endpoints.uploadPost());
   final headers = {"Content-type": "application/json"};
   final json = '{"title": "Solid Principles","department": "Integrations department","content": "Programmer Best Practicers","summary": "Structure your code responsibly","duration": 5,"contentCreatorId": "3a898ee3-787b-4e35-b1d9-ef71e22f1747"}';
@@ -58,18 +72,19 @@ Future<UploadDetails> getUploadDetailsFromApiById(url) async {
   print('Status code: ${response.statusCode}');
   print('Body: ${response.body}');
 
- */ /* UploadDetails  details = UploadDetails("title": "Solid Principles","department": "Integrations department","content": "Programmer Best Practicers","summary": "Structure your code responsibly","duration": 5,"contentCreatorId": "3a898ee3-787b-4e35-b1d9-ef71e22f1747");
+   UploadDetails  details = UploadDetails("title": "Solid Principles","department": "Integrations department","content": "Programmer Best Practicers","summary": "Structure your code responsibly","duration": 5,"contentCreatorId": "3a898ee3-787b-4e35-b1d9-ef71e22f1747");
   Map<String, dynamic> map = person.toJson();
   String rawJson = jsonEncode(map);
 
-  return decodedResponse;*/ /*
-}*/
+  return decodedResponse;
+}
 
-/*Future<UploadDetails> patchUploadDetails() async{
+Future<UploadDetails> patchUploadDetails() async{
   var mapped = await makePostRequest();
   print('AM WORKING!');
   return UploadDetails.toJson(mapped);
-}*/
+}
+*/
 
 ////PATCH IN UPLOADS
 Future<void> makePatchRequest() async {
@@ -90,6 +105,7 @@ Future<void> makeDeleteRequest() async {
 }
 
 //note kazi ingine
+/*
 Future<ApiResponse<T?>> getAsync<T>(String resourcePath) async {
   //final prefs = await SharedPreferences.getInstance();
   //var token = prefs.getString(UIData.authToken);
@@ -137,3 +153,4 @@ ApiResponse<T?> processResponse<T>(http.Response response) {
         );
   }
 }
+*/
