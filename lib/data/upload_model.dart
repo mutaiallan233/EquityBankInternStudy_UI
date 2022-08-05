@@ -66,8 +66,8 @@ class UploadDetails {
   String? department;
   String? content;
   String? summary;
-  int? duration;
-  String? contentCreatorId;
+  dynamic duration;
+  dynamic contentCreatorId;
   String? id;
   String? dateAdded;
   String? dateModified;
@@ -105,7 +105,7 @@ class UploadDetails {
     data['contentCreatorId'] = this.contentCreatorId;
     //data['id'] = this.id;
     //data['dateAdded'] = this.dateAdded;
-    //data['dateModified'] = this.dateModified;
+   // data['dateModified'] = this.dateModified;
     return data;
   }
 }

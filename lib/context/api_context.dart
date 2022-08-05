@@ -64,12 +64,12 @@ String baseUrl = 'https://localhost:7168/';
   }
 
   String learningMaterialGetId() {
-    String urlLeaningMaterialGetId = '${baseUrl}learning-material/get-by-id/{d56e4b46-a28d-4755-afbe-f46a1f7c21de}';
+    String urlLeaningMaterialGetId = '${baseUrl}learning-material/get-by-id/d56e4b46-a28d-4755-afbe-f46a1f7c21de';
     return urlLeaningMaterialGetId;
   }
 
   String learningMaterialUpdate() {
-    String urlLeaningMaterialUpdate = '${baseUrl}learning-material/update/{d56e4b46-a28d-4755-afbe-f46a1f7c21de}';
+    String urlLeaningMaterialUpdate = '${baseUrl}learning-material/update/d56e4b46-a28d-4755-afbe-f46a1f7c21de';
     return urlLeaningMaterialUpdate;
   }
 
