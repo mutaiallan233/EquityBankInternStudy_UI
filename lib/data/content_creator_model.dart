@@ -28,9 +28,9 @@ class ContentCreatorDetails {
     data['workEmail'] = this.workEmail;
     data['department'] = this.department;
     data['role'] = this.role;
-    data['id'] = this.id;
-    data['dateAdded'] = this.dateAdded;
-    data['dateModified'] = this.dateModified;
+    //data['id'] = this.id;
+    //data['dateAdded'] = this.dateAdded;
+    //data['dateModified'] = this.dateModified;
     return data;
   }
 }

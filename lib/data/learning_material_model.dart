@@ -32,9 +32,9 @@ class LearningMaterialDetails {
     data['internId'] = this.internId;
     data['workEmail'] = this.workEmail;
     data['isChecked'] = this.isChecked;
-    data['id'] = this.id;
-    data['dateAdded'] = this.dateAdded;
-    data['dateModified'] = this.dateModified;
+    //data['id'] = this.id;
+    //data['dateAdded'] = this.dateAdded;
+    //data['dateModified'] = this.dateModified;
     return data;
   }
 }

@@ -25,25 +25,29 @@ Future<List> getDataFromApi(String urlprovided) async {
   }
 }
 
-Future<dynamic> getUploadDetailsFromApi(url,model) async {
+Future<dynamic> getUploadDetailsFromApi(url, model) async {
   var mapped = await getDataFromApi(url);
   dynamic modelDetails;
   print(mapped);
 
-  List<UploadDetails> uploadDetails = mapped.map((e) => UploadDetails.fromJson(e)).toList();
-  List<InternDetails> internDetails = mapped.map((e) => InternDetails.fromJson(e)).toList();
-  List<LearningMaterialDetails> learningMaterialDetails= mapped.map((e) => LearningMaterialDetails.fromJson(e)).toList();
-  List<ContentCreatorDetails> contentCreatorDetails = mapped.map((e) => ContentCreatorDetails.fromJson(e)).toList();
-  if(model == 'upload'){
+  List<UploadDetails> uploadDetails =
+      mapped.map((e) => UploadDetails.fromJson(e)).toList();
+  List<InternDetails> internDetails =
+      mapped.map((e) => InternDetails.fromJson(e)).toList();
+  List<LearningMaterialDetails> learningMaterialDetails =
+      mapped.map((e) => LearningMaterialDetails.fromJson(e)).toList();
+  List<ContentCreatorDetails> contentCreatorDetails =
+      mapped.map((e) => ContentCreatorDetails.fromJson(e)).toList();
+  if (model == 'upload') {
     modelDetails = uploadDetails;
   }
-  if(model == 'intern'){
+  if (model == 'intern') {
     modelDetails = internDetails;
   }
-  if(model == 'learning'){
+  if (model == 'learning') {
     modelDetails = learningMaterialDetails;
   }
-  if(model == 'content'){
+  if (model == 'content') {
     modelDetails = contentCreatorDetails;
   }
   return modelDetails;
@@ -51,11 +55,9 @@ Future<dynamic> getUploadDetailsFromApi(url,model) async {
 
 //////// GET UPLOADS BY ID
 Future<dynamic> makeGetRequest(String api) async {
-
   final url = Uri.parse(api);
   var response = await get(url);
-  var decodedResponse =
-      jsonDecode(response.body);
+  var decodedResponse = jsonDecode(response.body);
 
   print('Status code: ${response.statusCode}');
   print('Headers: ${response.headers}');
@@ -63,84 +65,52 @@ Future<dynamic> makeGetRequest(String api) async {
   return decodedResponse;
 }
 
-Future<dynamic> getUploadDetailsFromApiById(url,model) async {
+Future<dynamic> getDetailsFromApiById(url, model) async {
   var mapped = await makeGetRequest(url);
   dynamic modelDetails;
   print('Retrieved: ${mapped}');
 
   //// ASSIGN MODEL TO ENDPOINT
-  if(model == 'upload'){
-     modelDetails = new UploadDetails.fromJson(mapped);
+  if (model == 'upload') {
+    modelDetails = new UploadDetails.fromJson(mapped);
   }
-  if(model == 'intern'){
-     modelDetails = new InternDetails.fromJson(mapped);
+  if (model == 'intern') {
+    modelDetails = new InternDetails.fromJson(mapped);
   }
-  if(model == 'learning'){
+  if (model == 'learning') {
     modelDetails = new LearningMaterialDetails.fromJson(mapped);
   }
-  if(model == 'content'){
+  if (model == 'content') {
     modelDetails = new ContentCreatorDetails.fromJson(mapped);
   }
   return modelDetails;
 }
+
 ////POST TO UPLOADS
-Future<void> makePostRequest() async {
-  final url = Uri.parse("https://localhost:7168/uploads/add-uploads");
-  //final headers = {"Content-type": "application/json"};
-  //final json = '{"title": "Hello", "department": "Solution development", "content": "Classes and Constructors", "summary": "Injecting interfaces into classes and functions like a pro",  "duration": 6,  "contentCreatorId": "68e42439-b4c9-413c-b33c-f25cfb444e72"}';
-  Map<String, dynamic> customer = UploadDetails(
-    title: 'Dependency Injection',
-    department: 'Solution development',
-    content: 'Classes and Constructors',
-    summary: 'Injecting interfaces into classes and functions like a pro',
-    duration: 6,
-    contentCreatorId: "68e42439-b4c9-413c-b33c-f25cfb444e72"
-  ).toJson();
+Future<void> makePostRequest(String url, dynamic test) async {
+  Map<String, dynamic> incoming = test.toJson();
 
+  print(incoming);
   Dio dio = new Dio();
-  
-/*Map<String,dynamic> some =
-{
-  "title": "Dependency Injection",
-  "department": "Solution development",
-  "content": "Classes and Constructors",
-  "summary": "Injecting interfaces into classes and functions like a pro",
-  "duration": 6,
-  "contentCreatorId": "68e42439-b4c9-413c-b33c-f25cfb444e72"
-};*/
 
-var responseDio =  await dio.post("https://localhost:7168/uploads/add-uploads", data: customer);
-print(responseDio.statusCode);
-print(responseDio.data);
-  //final response = await post(url,  body: json);
-  //print('Status code: ${response.statusCode}');
-  //print('Body: ${response.body}');
- /* print(customer);
-  var encodedResponse =  jsonEncode(customer);
-  print(encodedResponse);
-  final json = encodedResponse;*/
-
-/*  print(jsonEncode(some));
-  final response = await post(url,  body: jsonEncode(some));
-  print('Status code: ${response.statusCode}');
-  print('Body: ${response.body}');*/
-
-
-  // Map<String, dynamic> person = UploadDetails().toJson();
-  //Map<String, dynamic> map = person.toJson();
- // person.data['title'];
-  //String rawJson = jsonEncode(map);
-
+  var responseDio = await dio.post(url, data: incoming);
+  print(responseDio.statusCode);
+  print(responseDio.data);
 }
 
 ////PATCH IN UPLOADS
-Future<void> makePatchRequest() async {
-  final url = Uri.parse(endpoints.uploadUpdate());
-  final headers = {"Content-type": "application/json"};
-  final json = '{"title": "Hello"}';
-  final response = await patch(url, headers: headers, body: json);
+Future<void> makePatchRequest(url, test) async {
+
+ Dio dio = new Dio();
+ // final headers = {"Content-type": "application/json"};
+ var incoming = test.toJson();
+  //final json = {"title": "Hello", "department": '', "content":"" , "summary":"" , "duration": 8};
+ // print(json);
+  print(incoming);
+  print('Incoming Url: '+url);
+  final response = await dio.patch(url, data: incoming,);
   print('Status code: ${response.statusCode}');
-  print('Body: ${response.body}');
+  print('Body: ${response.data}');
 }
 
 ////DELETE FROM UPLOADS

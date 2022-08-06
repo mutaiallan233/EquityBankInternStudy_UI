@@ -15,7 +15,7 @@ String baseUrl = 'https://localhost:7168/';
   }
 
   String uploadUpdate() {
-    String urlUploadsUpdate = '${baseUrl}uploads/update}';
+    String urlUploadsUpdate = '${baseUrl}uploads/update/';
     return urlUploadsUpdate;
   }
 
@@ -37,17 +37,17 @@ String baseUrl = 'https://localhost:7168/';
   }
 
   String internGetId() {
-    String urlInternsGetId = '${baseUrl}intern/get-by-id/{d5647f74-1b94-4f27-805c-086349e752d1}';
+    String urlInternsGetId = '${baseUrl}intern/get-by-id/d5647f74-1b94-4f27-805c-086349e752d1';
     return urlInternsGetId;
   }
 
   String internUpdate() {
-    String urlInternsUpdate = '${baseUrl}intern/update/{3fa85f64-5717-4562-b3fc-2c963f66afa6}}';
+    String urlInternsUpdate = '${baseUrl}intern/update/';
     return urlInternsUpdate;
   }
 
   String internPost() {
-    String urlInternsPost = '${baseUrl}intern/add-uploads/{3fa85f64-5717-4562-b3fc-2c963f66afa6}';
+    String urlInternsPost = '${baseUrl}intern/add-intern';
     return urlInternsPost;
   }
 
@@ -69,12 +69,12 @@ String baseUrl = 'https://localhost:7168/';
   }
 
   String learningMaterialUpdate() {
-    String urlLeaningMaterialUpdate = '${baseUrl}learning-material/update/d56e4b46-a28d-4755-afbe-f46a1f7c21de';
+    String urlLeaningMaterialUpdate = '${baseUrl}learning-material/update/';
     return urlLeaningMaterialUpdate;
   }
 
   String learningMaterialPost() {
-    String urlLeaningMaterialPost = '${baseUrl}learning-material/add-learning-material/{d56e4b46-a28d-4755-afbe-f46a1f7c21de}';
+    String urlLeaningMaterialPost = '${baseUrl}learning-material/add-learning-material';
     return urlLeaningMaterialPost;
   }
 
@@ -92,7 +92,7 @@ String baseUrl = 'https://localhost:7168/';
   }
 
   String contentCreatorGetId() {
-    String urlLeaningMaterialGetId = '${baseUrl}content-creator/get-by-id/{e42c4292-6cf0-4874-8739-6581a5c3c61d}';
+    String urlLeaningMaterialGetId = '${baseUrl}content-creator/get-by-id/68e42439-b4c9-413c-b33c-f25cfb444e72';
     return urlLeaningMaterialGetId;
   }
 
@@ -102,7 +102,7 @@ String baseUrl = 'https://localhost:7168/';
   }
 
   String contentCreatorPost() {
-    String urlLeaningMaterialPost = '${baseUrl}content-creator/add-creator/{e42c4292-6cf0-4874-8739-6581a5c3c61d}';
+    String urlLeaningMaterialPost = '${baseUrl}content-creator/add-creator';
     return urlLeaningMaterialPost;
   }
 

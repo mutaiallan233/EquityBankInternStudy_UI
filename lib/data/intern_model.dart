@@ -25,12 +25,12 @@ class InternDetails {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['pfNumber'] = this.pfNumber;
-    data['workEmail'] = this.workEmail;
-    data['department'] = this.department;
-    data['id'] = this.id;
-    data['dateAdded'] = this.dateAdded;
-    data['dateModified'] = this.dateModified;
+    data['pfNumber'] = this.pfNumber??'';
+    data['workEmail'] = this.workEmail??'';
+    data['department'] = this.department??'';
+    //data['id'] = this.id;
+    //data['dateAdded'] = this.dateAdded;
+    //data['dateModified'] = this.dateModified;
     return data;
   }
 }

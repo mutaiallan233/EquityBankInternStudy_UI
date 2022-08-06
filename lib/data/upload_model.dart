@@ -97,12 +97,12 @@ class UploadDetails {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['title'] = this.title;
-    data['department'] = this.department;
-    data['content'] = this.content;
-    data['summary'] = this.summary;
+    data['title'] = this.title ?? '';
+    data['department'] = this.department?? '';
+    data['content'] = this.content?? '';
+    data['summary'] = this.summary?? '';
     data['duration'] = this.duration;
-    data['contentCreatorId'] = this.contentCreatorId;
+    data['contentCreatorId'] = this.contentCreatorId?? '';
     //data['id'] = this.id;
     //data['dateAdded'] = this.dateAdded;
    // data['dateModified'] = this.dateModified;
