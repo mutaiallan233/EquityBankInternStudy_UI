@@ -30,25 +30,19 @@ Future<dynamic> getUploadDetailsFromApi(url, model) async {
   dynamic modelDetails;
   print(mapped);
 
-  List<UploadDetails> uploadDetails =
-      mapped.map((e) => UploadDetails.fromJson(e)).toList();
-  List<InternDetails> internDetails =
-      mapped.map((e) => InternDetails.fromJson(e)).toList();
-  List<LearningMaterialDetails> learningMaterialDetails =
-      mapped.map((e) => LearningMaterialDetails.fromJson(e)).toList();
-  List<ContentCreatorDetails> contentCreatorDetails =
-      mapped.map((e) => ContentCreatorDetails.fromJson(e)).toList();
   if (model == 'upload') {
-    modelDetails = uploadDetails;
+    modelDetails = mapped.map((e) => UploadDetails.fromJson(e)).toList();
   }
   if (model == 'intern') {
-    modelDetails = internDetails;
+    modelDetails = mapped.map((e) => InternDetails.fromJson(e)).toList();
   }
   if (model == 'learning') {
-    modelDetails = learningMaterialDetails;
+    modelDetails =
+        mapped.map((e) => LearningMaterialDetails.fromJson(e)).toList();
   }
   if (model == 'content') {
-    modelDetails = contentCreatorDetails;
+    modelDetails =
+        mapped.map((e) => ContentCreatorDetails.fromJson(e)).toList();
   }
   return modelDetails;
 }
@@ -69,6 +63,8 @@ Future<dynamic> getDetailsFromApiById(String url, model) async {
   var mapped = await makeGetRequest(url);
   dynamic modelDetails;
   print('Retrieved: ${mapped}');
+
+
 
   //// ASSIGN MODEL TO ENDPOINT
   if (model == 'upload') {
@@ -100,12 +96,14 @@ Future<void> makePostRequest(String url, dynamic test) async {
 
 ////PATCH IN UPLOADS
 Future<void> makePatchRequest(String url, test) async {
-
- Dio dio = new Dio();
- var incoming = test.toJson();
+  Dio dio = new Dio();
+  var incoming = test.toJson();
   print(incoming);
-  print('Incoming Url: '+url);
-  final response = await dio.patch(url, data: incoming,);
+  print('Incoming Url: ' + url);
+  final response = await dio.patch(
+    url,
+    data: incoming,
+  );
   print('Status code: ${response.statusCode}');
   print('Body: ${response.data}');
 }
@@ -117,5 +115,3 @@ Future<void> makeDeleteRequest(String url) async {
   print('Status code: ${response.statusCode}');
   print('Body: ${response.data}');
 }
-
-

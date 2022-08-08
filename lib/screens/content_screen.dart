@@ -77,7 +77,93 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
             style: TextButton.styleFrom(
               primary: Theme.of(context).iconTheme.color,
             ),
-            onPressed: () {},
+            onPressed: () {
+              bool readonly = true;
+
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return StatefulBuilder(builder: (context, setState) {
+                      return SimpleDialog(
+                        title: Text("Register to The Intern Study Guide"),
+                        children: <Widget>[
+                          Divider(),
+                          SimpleDialogOption(
+                            onPressed: () {},
+                            child: const Text('Am an Intern'),
+                          ),
+                          SimpleDialogOption(
+                            onPressed: () {},
+                            child: const Text('Am a supervisor'),
+                          ),
+                          SimpleDialogOption(
+                            onPressed: () {
+                              if (readonly) {
+                                setState(() {
+                                  readonly = false;
+                                });
+                              } else {
+                                setState(() {
+                                  readonly = true;
+                                });
+                              }
+                            },
+                            child: readonly
+                                ? Row(children: [
+                                    Text('Any other'),
+                                    Icon(Icons.keyboard_arrow_down)
+                                  ])
+                                : Row(
+                                    children: [
+                                      Text('Non other'),
+                                      Icon(Icons.keyboard_arrow_up)
+                                    ],
+                                  ),
+                          ),
+                          Divider(),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex:4,
+                                child: TextFormField(
+                                  readOnly: readonly,
+                                  decoration: readonly
+                                      ? InputDecoration(
+                                          fillColor:
+                                              Colors.orange.withOpacity(.0),
+                                          filled: true)
+                                      : InputDecoration(
+                                          fillColor:
+                                              Colors.redAccent.withOpacity(.3),
+                                          filled: true,
+                                          hintText: 'Your Title Goes Here',
+                                        ),
+                                ),
+                              ),
+                              Expanded(
+                                flex:1,
+                                child: readonly
+                                    ? IconButton(
+                                        onPressed: () {},
+                                        icon: Icon(
+                                          Icons.send,
+                                          color: Colors.grey,
+                                        ))
+                                    : IconButton(
+                                        onPressed: () {},
+                                        icon: Icon(
+                                          Icons.send,
+                                          color:
+                                              Theme.of(context).colorScheme.secondary,
+                                        )),
+                              )
+                            ],
+                          ),
+                        ],
+                      );
+                    });
+                  });
+            },
             icon: const Icon(
               Icons.account_circle_outlined,
               size: 30.0,

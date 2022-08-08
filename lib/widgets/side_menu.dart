@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intern_study_guide/screens/register_intern.dart';
+
 
 import '../data/data.dart';
 
@@ -33,7 +35,17 @@ class SideMenu extends StatelessWidget {
           _SideMenuIconTab(
             iconData: Icons.search,
             title: 'Search',
-            onTap: () {},
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text("This is a content dialog"),
+                      content: Text("Dialogs are modal UI overlays that provide contextual app information. They block interactions with the app window until being explicitly dismissed. They often request some kind of action from the user."),
+                    );
+                  }
+              );
+            },
           ),
           _SideMenuIconTab(
             iconData: Icons.area_chart,
