@@ -25,7 +25,7 @@ String baseUrl = 'https://localhost:7168/';
   }
 
   String uploadDelete() {
-    String urlUploadsDelete = '${baseUrl}uploads/delete';
+    String urlUploadsDelete = '${baseUrl}uploads/delete/';
     return urlUploadsDelete;
   }
   ///////
@@ -52,7 +52,7 @@ String baseUrl = 'https://localhost:7168/';
   }
 
   String internDelete() {
-    String urlInternsDelete = '${baseUrl}intern/delete/{3fa85f64-5717-4562-b3fc-2c963f66afa6}';
+    String urlInternsDelete = '${baseUrl}intern/delete/';
     return urlInternsDelete;
   }
   ///////
@@ -79,7 +79,7 @@ String baseUrl = 'https://localhost:7168/';
   }
 
   String learningMaterialDelete() {
-    String urlLeaningMaterialDelete = '${baseUrl}learning-material/delete/{d56e4b46-a28d-4755-afbe-f46a1f7c21de}';
+    String urlLeaningMaterialDelete = '${baseUrl}learning-material/delete/';
     return urlLeaningMaterialDelete;
   }
 
@@ -92,12 +92,12 @@ String baseUrl = 'https://localhost:7168/';
   }
 
   String contentCreatorGetId() {
-    String urlLeaningMaterialGetId = '${baseUrl}content-creator/get-by-id/68e42439-b4c9-413c-b33c-f25cfb444e72';
+    String urlLeaningMaterialGetId = '${baseUrl}content-creator/get-by-id/8db153f8-05bf-4f59-837a-323622e55fee';
     return urlLeaningMaterialGetId;
   }
 
   String contentCreatorUpdate() {
-    String urlLeaningMaterialUpdate = '${baseUrl}content-creator/update/{e42c4292-6cf0-4874-8739-6581a5c3c61d}';
+    String urlLeaningMaterialUpdate = '${baseUrl}content-creator/update/';
     return urlLeaningMaterialUpdate;
   }
 
@@ -107,7 +107,7 @@ String baseUrl = 'https://localhost:7168/';
   }
 
   String contentCreatorDelete() {
-    String urlLeaningMaterialDelete = '${baseUrl}content-creator/delete/{e42c4292-6cf0-4874-8739-6581a5c3c61d}';
+    String urlLeaningMaterialDelete = '${baseUrl}content-creator/delete/';
     return urlLeaningMaterialDelete;
   }
 

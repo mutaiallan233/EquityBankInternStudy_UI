@@ -3,11 +3,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:intern_study_guide/context/api_context.dart';
-import 'package:intern_study_guide/controller/upload/upload.dart';
 import 'package:intern_study_guide/data/content_creator_model.dart';
 import 'package:intern_study_guide/data/intern_model.dart';
 import 'package:intern_study_guide/data/learning_material_model.dart';
 
+import '../client/api_client.dart';
 import '../data/upload_model.dart';
 
 class Aspnet extends StatefulWidget {
@@ -35,7 +35,7 @@ class _AspnetState extends State<Aspnet> {
             Text('upload'),
             Row(
               children: [
-                Text('Anything yet'),
+                Text('Testing Endpoints(5)'),
                 IconButton(
                     onPressed: () async {
                       String url = endpoints.uploadGetAll();
@@ -94,7 +94,9 @@ class _AspnetState extends State<Aspnet> {
                     icon: Icon(Icons.cloud_circle_outlined)),
                 IconButton(
                     onPressed: () async {
-
+                      String url = endpoints.uploadDelete()+'${'b361e01f-6bfa-43f4-828c-184b21ebd630'}';
+                      print(url);
+                      makeDeleteRequest(url);
                     },
                     icon: Icon(Icons.delete_forever_outlined)),
               ],
@@ -103,7 +105,7 @@ class _AspnetState extends State<Aspnet> {
             Text('Intern'),
             Row(
               children: [
-                Text('Anything yet'),
+                Text('Testing Endpoints(5)'),
                 IconButton(
                     onPressed: () async {
                       String url = endpoints.internGetAll();
@@ -148,7 +150,9 @@ class _AspnetState extends State<Aspnet> {
                     icon: Icon(Icons.cloud_circle_outlined)),
                 IconButton(
                     onPressed: () async {
-
+                      String url = endpoints.internDelete()+'${'d5647f74-1b94-4f27-805c-086349e752d1'}';
+                      print(url);
+                      makeDeleteRequest(url);
                     },
                     icon: Icon(Icons.delete_forever_outlined)),
               ],
@@ -157,7 +161,7 @@ class _AspnetState extends State<Aspnet> {
             Text('Learning Material'),
             Row(
               children: [
-                Text('Anything yet'),
+                Text('Testing Endpoints(5)'),
                 IconButton(
                     onPressed: () async {
                       String url = endpoints.learningMaterialGetAll();
@@ -200,14 +204,14 @@ class _AspnetState extends State<Aspnet> {
                       LearningMaterialDetails learningMaterialDetails = await getDetailsFromApiById(url, model);
                       String urlAccess = endpoints.learningMaterialUpdate()+'${learningMaterialDetails.id}';
                       print(urlAccess);
-                      makePatchRequest(urlAccess, LearningMaterialDetails(isChecked: true));
-                      ///TODO: RESUME ON POSTMAN TEST FOR PATCH LEARNING MATERIAL,AT CHECKED VALUE
-                      ///TODO: I THINK I NEED TO ACCESS THE INTERN FK AND UPLOAD MODEL ID AND WORKEMAIL OF SIJUI NANI
+                      makePatchRequest(urlAccess, LearningMaterialDetails(uploadModelId:learningMaterialDetails.uploadModelId,internId: learningMaterialDetails.internId,isChecked: false));
                     },
                     icon: Icon(Icons.cloud_circle_outlined)),
                 IconButton(
                     onPressed: () async {
-
+                      String url = endpoints.learningMaterialDelete()+'${'cc693de6-6116-42df-a090-81ab6e4f876e'}';
+                      print(url);
+                      makeDeleteRequest(url);
                     },
                     icon: Icon(Icons.delete_forever_outlined)),
               ],
@@ -216,7 +220,7 @@ class _AspnetState extends State<Aspnet> {
             Text('Content Creator'),
             Row(
               children: [
-                Text('Anything yet'),
+                Text('Testing Endpoints(5)'),
                 IconButton(
                     onPressed: () async {
                       String url = endpoints.contentCreatorGetAll();
@@ -252,19 +256,27 @@ class _AspnetState extends State<Aspnet> {
                     icon: Icon(Icons.cloud_upload)),
                 IconButton(
                     onPressed: () async {
-                      String url = endpoints.internGetId();
+                      String url = endpoints.contentCreatorGetId();
                       String model = 'content';
-                      InternDetails internDetails =
-                          await getDetailsFromApiById(url, model);
+                      ContentCreatorDetails contentCreatorDetails = await getDetailsFromApiById(url, model);
+                      String urlAccess = endpoints.contentCreatorUpdate()+'${contentCreatorDetails.id}';
+                      print(urlAccess);
+                      makePatchRequest(urlAccess, ContentCreatorDetails(role: 'Lead backend dev'));
                     },
                     icon: Icon(Icons.cloud_circle_outlined)),
                 IconButton(
                     onPressed: () async {
-
+                      String url = endpoints.contentCreatorDelete()+'${'8db153f8-05bf-4f59-837a-323622e55fee'}';
+                      print(url);
+                      makeDeleteRequest(url);
                     },
                     icon: Icon(Icons.delete_forever_outlined)),
               ],
             ),
+            ElevatedButton(onPressed:(){
+              Navigator.of(context).pop();
+            },  child: Text('back')
+            )
           ],
         ),
       )),

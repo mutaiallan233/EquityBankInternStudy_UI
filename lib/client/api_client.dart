@@ -8,7 +8,7 @@ import 'package:dio/dio.dart';
 
 import 'package:intern_study_guide/data/upload_model.dart';
 
-import '../../data/intern_model.dart';
+import '../data/intern_model.dart';
 
 EndPoints endpoints = new EndPoints();
 ////// GET ALL UPLOADS
@@ -65,7 +65,7 @@ Future<dynamic> makeGetRequest(String api) async {
   return decodedResponse;
 }
 
-Future<dynamic> getDetailsFromApiById(url, model) async {
+Future<dynamic> getDetailsFromApiById(String url, model) async {
   var mapped = await makeGetRequest(url);
   dynamic modelDetails;
   print('Retrieved: ${mapped}');
@@ -99,13 +99,10 @@ Future<void> makePostRequest(String url, dynamic test) async {
 }
 
 ////PATCH IN UPLOADS
-Future<void> makePatchRequest(url, test) async {
+Future<void> makePatchRequest(String url, test) async {
 
  Dio dio = new Dio();
- // final headers = {"Content-type": "application/json"};
  var incoming = test.toJson();
-  //final json = {"title": "Hello", "department": '', "content":"" , "summary":"" , "duration": 8};
- // print(json);
   print(incoming);
   print('Incoming Url: '+url);
   final response = await dio.patch(url, data: incoming,);
@@ -114,60 +111,11 @@ Future<void> makePatchRequest(url, test) async {
 }
 
 ////DELETE FROM UPLOADS
-Future<void> makeDeleteRequest() async {
-  final url = Uri.parse(endpoints.uploadDelete());
-  final response = await delete(url);
+Future<void> makeDeleteRequest(String url) async {
+  Dio dio = new Dio();
+  final response = await dio.delete(url);
   print('Status code: ${response.statusCode}');
-  print('Body: ${response.body}');
+  print('Body: ${response.data}');
 }
 
-//note kazi ingine
-/*
-Future<ApiResponse<T?>> getAsync<T>(String resourcePath) async {
-  //final prefs = await SharedPreferences.getInstance();
-  //var token = prefs.getString(UIData.authToken);
-  //var tenantId = prefs.getInt(UIData.tenantId);
-  //var url = Uri.parse('$ApiEndpointUrl/$resourcePath');
-  var url = Uri.parse(endpoints.uploadGetId());
 
-  var response = await http.get(url, headers: {
-    'Content-type': 'application/json',
-    //'Accept': 'application/json',
-    //'Authorization': 'Bearer $token',
-    //'Piggy-TenantId': tenantId.toString()
-  });
-  return processResponse<T>(response);
-}
-
-class ApiResponse<T> {
-  ApiResponse({
-    required this.result,
-  });
-
-  final T result;
-}
-
-ApiResponse<T?> processResponse<T>(http.Response response) {
-  try {
-    // if (!((response.statusCode < 200) ||
-    //     (response.statusCode >= 300) ||
-    //     (response.body == null))) {
-    var jsonResult = response.body;
-    dynamic resultClass = jsonDecode(jsonResult);
-
-    // print(jsonResult);
-
-    var output = ApiResponse<T?>(
-      result: resultClass,
-      //success: resultClass["success"],
-      //unAuthorizedRequest: resultClass['unAuthorizedRequest'],
-    );
-
-    return output;
-  } catch (e) {
-    return ApiResponse<T?>(
-        result: null
-        );
-  }
-}
-*/
