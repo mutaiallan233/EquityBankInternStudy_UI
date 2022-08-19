@@ -10,22 +10,22 @@ String baseUrl = 'https://localhost:7168/';
   }
 
   String uploadGetId() {
-    String urlUploadsGetId = '${baseUrl}uploads/get-by-id/{3fa85f64-5717-4562-b3fc-2c963f66afa6}';
+    String urlUploadsGetId = '${baseUrl}uploads/get-by-id';
     return urlUploadsGetId;
   }
 
   String uploadUpdate() {
-    String urlUploadsUpdate = '${baseUrl}uploads/update/';
+    String urlUploadsUpdate = '${baseUrl}uploads/update';
     return urlUploadsUpdate;
   }
 
   String uploadPost() {
-    String urlUploadsPost = '${baseUrl}uploads/add-uploads';
+    String urlUploadsPost = '${baseUrl}uploads/add';
     return urlUploadsPost;
   }
 
   String uploadDelete() {
-    String urlUploadsDelete = '${baseUrl}uploads/delete/';
+    String urlUploadsDelete = '${baseUrl}uploads/delete';
     return urlUploadsDelete;
   }
   ///////
@@ -47,7 +47,7 @@ String baseUrl = 'https://localhost:7168/';
   }
 
   String internPost() {
-    String urlInternsPost = '${baseUrl}intern/add-intern';
+    String urlInternsPost = '${baseUrl}intern/add';
     return urlInternsPost;
   }
 
@@ -102,7 +102,7 @@ String baseUrl = 'https://localhost:7168/';
   }
 
   String contentCreatorPost() {
-    String urlLeaningMaterialPost = '${baseUrl}content-creator/add-creator';
+    String urlLeaningMaterialPost = '${baseUrl}content-creator/add';
     return urlLeaningMaterialPost;
   }
 

@@ -11,7 +11,9 @@ import 'package:intern_study_guide/data/upload_model.dart';
 import '../data/intern_model.dart';
 
 EndPoints endpoints = new EndPoints();
+Dio dio = Dio();
 ////// GET ALL UPLOADS
+
 Future<List> getDataFromApi(String urlprovided) async {
   var client = http.Client();
   var url = Uri.parse(urlprovided);
@@ -115,3 +117,4 @@ Future<void> makeDeleteRequest(String url) async {
   print('Status code: ${response.statusCode}');
   print('Body: ${response.data}');
 }
+

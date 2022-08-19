@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intern_study_guide/screens/register_intern.dart';
+import 'package:intern_study_guide/widgets/progress_dialog.dart';
 
 
 import '../data/data.dart';
@@ -39,10 +40,7 @@ class SideMenu extends StatelessWidget {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return AlertDialog(
-                      title: Text("This is a content dialog"),
-                      content: Text("Dialogs are modal UI overlays that provide contextual app information. They block interactions with the app window until being explicitly dismissed. They often request some kind of action from the user."),
-                    );
+                    return ProgressDialog();
                   }
               );
             },
@@ -50,7 +48,14 @@ class SideMenu extends StatelessWidget {
           _SideMenuIconTab(
             iconData: Icons.area_chart,
             title: 'Progress',
-            onTap: () {},
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (context){
+                    return ProgressDialog();
+                  });
+              ProgressDialog();
+            },
           ),
           const SizedBox(height: 12.0),
           _LibraryPlaylists(),

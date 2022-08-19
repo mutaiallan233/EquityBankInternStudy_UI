@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:intern_study_guide/client/GenericService.dart';
 import 'package:intern_study_guide/context/api_context.dart';
 import 'package:intern_study_guide/data/content_creator_model.dart';
 import 'package:intern_study_guide/data/intern_model.dart';
@@ -39,10 +40,10 @@ class _AspnetState extends State<Aspnet> {
                 IconButton(
                     onPressed: () async {
                       String url = endpoints.uploadGetAll();
-                      String model = 'upload';
 
                       List<UploadDetails> uploadDetails =
-                          await getUploadDetailsFromApi(url, model);
+                          await GenericService<UploadDetails>()
+                              .getAll(UploadDetails.fromJson, url);
                       uploadDetails.forEach((element) {
                         print(element.title);
                       });
@@ -51,52 +52,59 @@ class _AspnetState extends State<Aspnet> {
                 IconButton(
                     onPressed: () async {
                       String url = endpoints.uploadGetId();
-                      String model = 'upload';
+                      String id = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
+
                       UploadDetails uploadDetails =
-                          await getDetailsFromApiById(url, model);
+                          await GenericService<UploadDetails>()
+                              .get(UploadDetails.fromJson, url, id);
                       print(uploadDetails.title);
                     },
                     icon: Icon(Icons.cloud_circle)),
                 IconButton(
                     onPressed: () async {
                       String url = endpoints.uploadPost();
-                      makePostRequest(
-                          url,
-                          UploadDetails(
-                              title: 'Dependency Injection',
-                              department: 'programing tools',
-                              content: 'Classes and Constructors',
-                              summary:
-                                  'Injecting interfaces into classes and functions like a pro',
-                              duration: 6,
-                              contentCreatorId:
-                                  "68e42439-b4c9-413c-b33c-f25cfb444e72"
-                          )
-                      );
+                      print(url);
+                      UploadDetails uploadDetails =
+                          await GenericService<UploadDetails>().create(
+                              url,
+                              UploadDetails(
+                                  title: 'CI/CD',
+                                  department: 'DevOp tools',
+                                  content: 'Classes and Constructors',
+                                  summary:
+                                      'Injecting interfaces into classes and functions like a pro',
+                                  duration: 6,
+                                  contentCreatorId:
+                                      "68e42439-b4c9-413c-b33c-f25cfb444e72"));
                       //dio.post(url, body);
                     },
                     icon: Icon(Icons.cloud_upload)),
                 IconButton(
                     onPressed: () async {
-                      ///TODO; THIS CAN BE DONE BETTER BY PARSING ID FROM GETBYID ENDPOINT INSTEAD OF ACCESSING BOTH ENDPOINTS ACTUALLY LET ME DO IT
-                      ///TODO: IT WORKS JUST FINE,, UNNECESSARY THOUGH IN THE EVENT A PROVIDER IS GIVING US THE ID
-                      ///TODO: AN ERROR ON ASPNET MITIGATED BY PARSING CONTENTCREATORID ON DART TO BE ADDRESSED[BACKEND]
-                      ///TODO: LET US PATCH THE REST
-                      String urlChange = endpoints.uploadGetId();
-                      String model = 'upload';
-                      // ContentCreatorDetails contentCreatorDetails =
-                      //await getUploadDetailsFromApiById(url, model);
-                      UploadDetails uploadDetails = await  getDetailsFromApiById(urlChange, model);
-                      String url = endpoints.uploadUpdate()+'${uploadDetails.id}';
+                      String url = endpoints.uploadUpdate();
+                      String id = '54ba229d-e83f-4f9f-a559-212ce00a8ab0';
+
+                      UploadDetails uploadDetails =
+                          await GenericService<UploadDetails>().update(
+                              UploadDetails(
+                                  title: "Microservices",
+                                  department: '',
+                                  content: '',
+                                  summary: '',
+                                  duration: 5,
+                                  contentCreatorId:
+                                      '68e42439-b4c9-413c-b33c-f25cfb444e72'),
+                              url,
+                              id);
                       print(url);
-                      await makePatchRequest(url,UploadDetails(title:"Operators of CRUD", department: '', content:'' , summary:'' , duration:5, contentCreatorId:uploadDetails.contentCreatorId));
                     },
                     icon: Icon(Icons.cloud_circle_outlined)),
                 IconButton(
                     onPressed: () async {
-                      String url = endpoints.uploadDelete()+'${'b361e01f-6bfa-43f4-828c-184b21ebd630'}';
+                      String url = endpoints.uploadDelete();
+                      String id = '8ad70770-ba98-4dc7-bf9b-3aab8f4e9e24';
                       print(url);
-                      makeDeleteRequest(url);
+                      Future<bool> uploadDetails = GenericService<UploadDetails>().delete(id, url);
                     },
                     icon: Icon(Icons.delete_forever_outlined)),
               ],
@@ -142,15 +150,19 @@ class _AspnetState extends State<Aspnet> {
                     onPressed: () async {
                       String url = endpoints.internGetId();
                       String model = 'intern';
-                      InternDetails internDetails = await getDetailsFromApiById(url, model);
-                      String urlAccess = endpoints.internUpdate()+'${internDetails.id}';
+                      InternDetails internDetails =
+                          await getDetailsFromApiById(url, model);
+                      String urlAccess =
+                          endpoints.internUpdate() + '${internDetails.id}';
                       print(urlAccess);
-                      makePatchRequest(urlAccess, InternDetails(pfNumber:'777777'));
+                      makePatchRequest(
+                          urlAccess, InternDetails(pfNumber: '777777'));
                     },
                     icon: Icon(Icons.cloud_circle_outlined)),
                 IconButton(
                     onPressed: () async {
-                      String url = endpoints.internDelete()+'${'d5647f74-1b94-4f27-805c-086349e752d1'}';
+                      String url = endpoints.internDelete() +
+                          '${'d5647f74-1b94-4f27-805c-086349e752d1'}';
                       print(url);
                       makeDeleteRequest(url);
                     },
@@ -201,15 +213,24 @@ class _AspnetState extends State<Aspnet> {
                     onPressed: () async {
                       String url = endpoints.learningMaterialGetId();
                       String model = 'learning';
-                      LearningMaterialDetails learningMaterialDetails = await getDetailsFromApiById(url, model);
-                      String urlAccess = endpoints.learningMaterialUpdate()+'${learningMaterialDetails.id}';
+                      LearningMaterialDetails learningMaterialDetails =
+                          await getDetailsFromApiById(url, model);
+                      String urlAccess = endpoints.learningMaterialUpdate() +
+                          '${learningMaterialDetails.id}';
                       print(urlAccess);
-                      makePatchRequest(urlAccess, LearningMaterialDetails(uploadModelId:learningMaterialDetails.uploadModelId,internId: learningMaterialDetails.internId,isChecked: false));
+                      makePatchRequest(
+                          urlAccess,
+                          LearningMaterialDetails(
+                              uploadModelId:
+                                  learningMaterialDetails.uploadModelId,
+                              internId: learningMaterialDetails.internId,
+                              isChecked: false));
                     },
                     icon: Icon(Icons.cloud_circle_outlined)),
                 IconButton(
                     onPressed: () async {
-                      String url = endpoints.learningMaterialDelete()+'${'cc693de6-6116-42df-a090-81ab6e4f876e'}';
+                      String url = endpoints.learningMaterialDelete() +
+                          '${'cc693de6-6116-42df-a090-81ab6e4f876e'}';
                       print(url);
                       makeDeleteRequest(url);
                     },
@@ -258,26 +279,30 @@ class _AspnetState extends State<Aspnet> {
                     onPressed: () async {
                       String url = endpoints.contentCreatorGetId();
                       String model = 'content';
-                      ContentCreatorDetails contentCreatorDetails = await getDetailsFromApiById(url, model);
-                      String urlAccess = endpoints.contentCreatorUpdate()+'${contentCreatorDetails.id}';
+                      ContentCreatorDetails contentCreatorDetails =
+                          await getDetailsFromApiById(url, model);
+                      String urlAccess = endpoints.contentCreatorUpdate() +
+                          '${contentCreatorDetails.id}';
                       print(urlAccess);
-                      makePatchRequest(urlAccess, ContentCreatorDetails(role: 'Lead backend dev'));
+                      makePatchRequest(urlAccess,
+                          ContentCreatorDetails(role: 'Lead backend dev'));
                     },
                     icon: Icon(Icons.cloud_circle_outlined)),
                 IconButton(
                     onPressed: () async {
-                      String url = endpoints.contentCreatorDelete()+'${'8db153f8-05bf-4f59-837a-323622e55fee'}';
+                      String url = endpoints.contentCreatorDelete() +
+                          '${'8db153f8-05bf-4f59-837a-323622e55fee'}';
                       print(url);
                       makeDeleteRequest(url);
                     },
                     icon: Icon(Icons.delete_forever_outlined)),
               ],
             ),
-            ElevatedButton(onPressed:(){
-              Navigator.of(context).pop();
-
-              },  child: Text('back')
-            )
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('back'))
           ],
         ),
       )),
