@@ -37,7 +37,7 @@ String baseUrl = 'https://localhost:7168/';
   }
 
   String internGetId() {
-    String urlInternsGetId = '${baseUrl}intern/get-by-id/d5647f74-1b94-4f27-805c-086349e752d1';
+    String urlInternsGetId = '${baseUrl}intern/get-by-id';
     return urlInternsGetId;
   }
 

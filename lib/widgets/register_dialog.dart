@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intern_study_guide/client/GenericService.dart';
+import 'package:intern_study_guide/client/generic_service.dart';
 import 'package:intern_study_guide/client/api_client.dart';
 import 'package:intern_study_guide/data/content_creator_model.dart';
 import 'package:intern_study_guide/data/departments.dart';

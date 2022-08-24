@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../client/generic_service.dart';
+import '../client/api_client.dart';
 import '../data/data.dart';
+import '../data/intern_model.dart';
+import '../data/upload_model.dart';
 
 class PlaylistHeader extends StatelessWidget {
   final Playlist playlist;
@@ -12,6 +16,23 @@ class PlaylistHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    String url = endpoints.internGetId();
+    String id = '932c13da-6cec-44bf-89c6-960692d0d611';
+
+    getValue() async {
+      UploadDetails uploadDetails =
+      await GenericService<UploadDetails>()
+          .get(UploadDetails.fromJson, url, id);
+      print(uploadDetails.title);
+
+      InternDetails internDetails =
+      await GenericService<InternDetails>()
+          .get(InternDetails.fromJson, url, id);
+      print(internDetails.department);
+    }
+
+
     return Column(
       children: [
         Row(
@@ -35,7 +56,7 @@ class PlaylistHeader extends StatelessWidget {
                         .copyWith(fontSize: 12.0),
                   ),
                   const SizedBox(height: 12.0),
-                  Text(playlist.name,
+                  Text('nafaa kuchange',
                       style: Theme.of(context).textTheme.headline2),
                   const SizedBox(height: 16.0),
                   Text(
