@@ -36,6 +36,11 @@ dependencies:
   http: ^0.13.4
   dio: ^4.0.6
   fluent_ui: ^3.9.1
+  multiple_stream_builder: ^3.0.2
+  charts_flutter: ^0.12.0
+  fl_chart: ^0.55.1
+  table_calendar: ^3.0.6
+  url_launcher: ^6.1.5
 
 
 flutter_test:

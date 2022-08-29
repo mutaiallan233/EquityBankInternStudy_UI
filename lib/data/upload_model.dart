@@ -3,10 +3,11 @@
 class UploadDetails {
   String? title;
   String? department;
-  String? content;
   String? summary;
   dynamic duration;
   dynamic contentCreatorId;
+  String? contentCreatorName;
+  List<dynamic>? content;
   String? id;
   String? dateAdded;
   String? dateModified;
@@ -18,6 +19,7 @@ class UploadDetails {
         this.summary,
         this.duration,
         this.contentCreatorId,
+        this.contentCreatorName,
         this.id,
         this.dateAdded,
         this.dateModified});
@@ -25,10 +27,11 @@ class UploadDetails {
   UploadDetails.fromJson(Map<String, dynamic> json) {
     title = json['title'];
     department = json['department'];
-    content = json['content'];
     summary = json['summary'];
     duration = json['duration'];
     contentCreatorId = json['contentCreatorId'];
+    contentCreatorName = json['contentCreatorName'];
+    content = json['content'];
     id = json['id'];
     dateAdded = json['dateAdded'].toString();
     dateModified = json['dateModified'].toString();
@@ -42,6 +45,7 @@ class UploadDetails {
     data['summary'] = this.summary?? '';
     data['duration'] = this.duration;
     data['contentCreatorId'] = this.contentCreatorId?? '';
+    data['contentCreatorName'] = this.contentCreatorName ?? '';
     //data['id'] = this.id;
     //data['dateAdded'] = this.dateAdded;
    // data['dateModified'] = this.dateModified;

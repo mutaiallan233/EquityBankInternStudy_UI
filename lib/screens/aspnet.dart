@@ -107,7 +107,7 @@ class _AspnetState extends State<Aspnet> {
                                 UploadDetails(
                                     title: 'CI/CD',
                                     department: 'DevOp tools',
-                                    content: 'Classes and Constructors',
+                                    content: ['Classes and Constructors'],
                                     summary:
                                         'Injecting interfaces into classes and functions like a pro',
                                     duration: 6,
@@ -126,7 +126,7 @@ class _AspnetState extends State<Aspnet> {
                                 UploadDetails(
                                     title: "Microservices",
                                     department: '',
-                                    content: '',
+                                    content: [''],
                                     summary: '',
                                     duration: 5,
                                     contentCreatorId:

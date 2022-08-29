@@ -25,6 +25,7 @@ class GenericService<T> {
   Future create(String url, T data) async {
     //auth = await generateAuth();
     var stringencoded = jsonEncode(data);
+    print(stringencoded);
     Response response = await dio.post(url, data: stringencoded);
     return data;
   }

@@ -10,7 +10,7 @@ class StreamService<T> {
       T streamDetails =
       await GenericService<T>()
           .get(fromJson, url,id);
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 1));
 
       yield streamDetails;
     }
@@ -21,7 +21,7 @@ class StreamService<T> {
 
     while (i < 10) {
       List<T> streamDetails = await GenericService<T>().getAll(fromJson, url);
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 1));
 
       yield streamDetails;
     }

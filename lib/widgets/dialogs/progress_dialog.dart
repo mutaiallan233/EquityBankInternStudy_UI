@@ -6,7 +6,7 @@ class ProgressDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Feature in development'),
+      title: Text('Feature in Development'),
       content: Text('Tag in to develop/ improve on this feature'),
     );
   }

@@ -92,7 +92,7 @@ String baseUrl = 'https://localhost:7168/';
   }
 
   String contentCreatorGetId() {
-    String urlLeaningMaterialGetId = '${baseUrl}content-creator/get-by-id/8db153f8-05bf-4f59-837a-323622e55fee';
+    String urlLeaningMaterialGetId = '${baseUrl}content-creator/get-by-id';
     return urlLeaningMaterialGetId;
   }
 

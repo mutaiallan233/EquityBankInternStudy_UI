@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:intern_study_guide/widgets/register_dialog.dart';
+import 'package:intern_study_guide/screens/multiple_stream.dart';
+import 'package:intern_study_guide/widgets/study_list.dart';
 
 import '../data/data.dart';
+import '../widgets/dialogs/register_dialog.dart';
 import '../widgets/study_header.dart';
 import '../widgets/tracks_list.dart';
 
@@ -231,7 +233,9 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
             ),
             children: [
               PlaylistHeader(playlist: widget.playlist),
-              TracksList(tracks: widget.playlist.songs),
+              //TracksList(tracks: widget.playlist.songs),
+              StudyList(),
+              MultipleStream(),
             ],
           ),
         ),

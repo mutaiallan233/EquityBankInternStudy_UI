@@ -112,7 +112,6 @@ class _RegisterDialogState extends State<RegisterDialog> {
                               print('The new value is: ' + dropValue);
                             });
                           }),
-
                     ],
                   ),
                 ),
